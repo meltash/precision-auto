@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Precision Auto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+            filter: grayscale(100%);
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            inset: 0;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+        
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: #ef4444;
+            z-index: 100;
+            transition: width 0.1s;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 dark:bg-gray-900 dark:text-gray-300">
+
+    <!-- Loading Screen -->
+    <div class="loading-screen dark:bg-gray-900">
+        <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-red-500"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm z-50 shadow-md">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-wrench text-red-500 text-2xl mr-2"></i>
+                    <div class="text-2xl font-bold">Precision Auto</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#services" class="hover:text-red-500 transition-colors font-medium">Services</a>
+                    <a href="#about-us" class="hover:text-red-500 transition-colors font-medium">About</a>
+                    <a href="#pricing" class="hover:text-red-500 transition-colors font-medium">Pricing</a>
+                    <a href="#contact" class="hover:text-red-500 transition-colors font-medium">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="dark-mode-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <i class="fas fa-moon dark:hidden"></i>
+                        <i class="fas fa-sun hidden dark:block"></i>
+                    </button>
+                    <button id="mobile-menu-button" class="md:hidden p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 dark:bg-gray-900/95 backdrop-blur-sm">
+            <div class="container mx-auto px-6 py-4 space-y-4">
+                <a href="#services" class="block hover:text-red-500 transition-colors">Services</a>
+                <a href="#about-us" class="block hover:text-red-500 transition-colors">About</a>
+                <a href="#pricing" class="block hover:text-red-500 transition-colors">Pricing</a>
+                <a href="#contact" class="block hover:text-red-500 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center text-white">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1591293835940-934a7c4f2d9b?auto=format&fit=crop&q=80" 
+                 alt="Modern Auto Workshop"
+                 class="w-full h-full object-cover filter grayscale">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-black/50"></div>
+        </div>
+        <div class="relative z-10 text-center max-w-4xl px-6">
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Expert Auto Care You Can Trust</h1>
+            <p class="text-xl md:text-2xl mb-10 text-gray-200">Professional service with dedication to excellence</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#booking" class="bg-red-500 hover:bg-red-600 text-white px-8 py-4 rounded-full transition-colors text-lg font-semibold">
+                    Book Now
+                </a>
+                <a href="#services" class="bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-full transition-colors text-lg font-semibold backdrop-blur-sm">
+                    Our Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all animate-on-scroll">
+                    <div class="text-4xl font-bold text-red-500 mb-2 flex justify-center items-center">
+                        <span class="count" data-count="15">0</span>+
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-400 text-center">Years Experience</div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all animate-on-scroll">
+                    <div class="text-4xl font-bold text-red-500 mb-2 flex justify-center items-center">
+                        <span class="count" data-count="10000">0</span>+
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-400 text-center">Cars Serviced</div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all animate-on-scroll">
+                    <div class="text-4xl font-bold text-red-500 mb-2 flex justify-center items-center">
+                        <span class="count" data-count="50">0</span>+
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-400 text-center">Expert Mechanics</div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl shadow-lg transform hover:scale-105 transition-all animate-on-scroll">
+                    <div class="text-4xl font-bold text-red-500 mb-2 flex justify-center items-center">
+                        <span class="count" data-count="98">0</span>%
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-400 text-center">Satisfaction Rate</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 relative bg-gray-900 text-white">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&q=80"
+                 alt="Service Background"
+                 class="w-full h-full object-cover filter grayscale opacity-20">
+        </div>
+        <div class="relative z-10 container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 animate-on-scroll">Our Services</h2>
+
+            <!-- Search/Filter for Services -->
+            <div class="container mx-auto px-4 mb-8">
+                <input type="text" 
+                       id="service-search" 
+                       placeholder="Search services..."
+                       class="w-full max-w-md mx-auto block px-4 py-2 rounded-lg border focus:ring-2 focus:ring-red-500 focus:border-transparent">
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="service-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&q=80" 
+                         alt="Engine Service"
+                         class="w-full h-48 object-cover filter grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Engine Service</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Complete engine diagnostics and repair services</p>
+                    </div>
+                </div>
+                <div class="service-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80" 
+                         alt="Brake Service"
+                         class="w-full h-48 object-cover filter grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Brake Service</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Professional brake inspection and replacement</p>
+                    </div>
+                </div>
+                <div class="service-card bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&q=80" 
+                         alt="Tire Service"
+                         class="w-full h-48 object-cover filter grayscale hover:grayscale-0 transition-all duration-500">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Tire Service</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Tire rotation, balancing, and replacement</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about-us" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 animate-on-scroll">About Us</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 animate-on-scroll">
+                    <h3 class="text-2xl font-bold mb-4">Your Trusted Auto Care Partner</h3>
+                    <p class="text-gray-600 dark:text-gray-400">With over 15 years of experience, we provide professional auto repair services with a commitment to excellence and customer satisfaction.</p>
+                    <p class="text-gray-600 dark:text-gray-400">Our team of certified mechanics uses state-of-the-art equipment to diagnose and repair your vehicle with precision and care.</p>
+                    <div class="flex gap-4 mt-6">
+                        <img src="cert1.jpg" 
+                             alt="Certification 1" 
+                             class="w-16 h-16 object-cover rounded filter grayscale">
+                        <img src="cert2.jpg" 
+                             alt="Certification 2" 
+                             class="w-16 h-16 object-cover rounded filter grayscale">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1625047509248-ec889cbff17f?auto=format&fit=crop&q=80" 
+                         alt="Workshop Image 1" 
+                         class="rounded-lg shadow-lg filter grayscale">
+                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80" 
+                         alt="Workshop Image 2" 
+                         class="rounded-lg shadow-lg filter grayscale mt-8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-16 relative bg-gray-900 text-white">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80"
+                 alt="Reviews Background"
+                 class="w-full h-full object-cover filter grayscale opacity-20">
+        </div>
+        <div class="relative z-10 container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-12 animate-on-scroll">What Our Customers Say</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                    <p class="mb-4">"Outstanding service and professional staff. Highly recommended!"</p>
+                    <p class="font-bold">- John D.</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                    <p class="mb-4">"Best auto repair shop in town. Fair prices and quality work."</p>
+                    <p class="font-bold">- Sarah M.</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg">
+                    <p class="mb-4">"They fixed my car quickly and efficiently. Great experience!"</p>
+                    <p class="font-bold">- Mike R.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 animate-on-scroll">Our Pricing</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 animate-on-scroll">
+                    <div class="bg-gradient-to-r from-red-500 to-red-600 p-6 text-white">
+                        <h3 class="text-2xl font-bold">Basic Service</h3>
+                        <div class="text-3xl font-bold mt-2">$99<span class="text-sm">/service</span></div>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Oil Change
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Tire Rotation
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Basic Inspection
+                            </li>
+                        </ul>
+                        <button class="w-full mt-6 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg transition-colors">
+                            Choose Plan
+                        </button>
+                    </div>
+                </div>
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 animate-on-scroll">
+                    <div class="bg-gradient-to-r from-red-500 to-red-600 p-6 text-white">
+                        <h3 class="text-2xl font-bold">Standard Service</h3>
+                        <div class="text-3xl font-bold mt-2">$199<span class="text-sm">/service</span></div>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Oil Change
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Tire Rotation
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Brake Service
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Basic Inspection
+                            </li>
+                        </ul>
+                        <button class="w-full mt-6 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg transition-colors">
+                            Choose Plan
+                        </button>
+                    </div>
+                </div>
+                <div class="pricing-card bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-all duration-300 animate-on-scroll">
+                    <div class="bg-gradient-to-r from-red-500 to-red-600 p-6 text-white">
+                        <h3 class="text-2xl font-bold">Premium Service</h3>
+                        <div class="text-3xl font-bold mt-2">$299<span class="text-sm">/service</span></div>
+                    </div>
+                    <div class="p-6">
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Oil Change
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Tire Rotation
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Brake Service
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Engine Tune-Up
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Basic Inspection
+                            </li>
+                        </ul>
+                        <button class="w-full mt-6 bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg transition-colors">
+                            Choose Plan
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Update Blog Section -->
+    <section id="blog" class="py-16 bg-gray-100 dark:bg-gray-850">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 animate-on-scroll">Latest News</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&q=80" 
+                         alt="Winter Maintenance"
+                         class="w-full h-48 object-cover filter grayscale">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Winter Car Maintenance</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Essential tips for winter car care</p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1517490232338-06b912a786b5?auto=format&fit=crop&q=80" 
+                         alt="Oil Change"
+                         class="w-full h-48 object-cover filter grayscale">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">The Importance of Regular Oil Changes</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Why regular oil changes are crucial for your engine's health.</p>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden animate-on-scroll">
+                    <img src="https://images.unsplash.com/photo-1580274455191-1c62238fa333?auto=format&fit=crop&q=80" 
+                         alt="Tire Guide"
+                         class="w-full h-48 object-cover filter grayscale">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Choosing the Right Tires for Your Car</h3>
+                        <p class="text-gray-600 dark:text-gray-400">A guide to selecting the best tires for your vehicle and driving conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-12">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Contact Us</h2>
+            <div class="md:flex justify-center">
+                <div class="md:w-1/2">
+                    <form>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Name">
+                        </div>
+                        <div class="mb-4">
+                            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Email">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 text-sm font-bold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Message"></textarea>
+                        </div>
+                        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Move Booking Form here, before footer -->
+    <section id="booking" class="py-16 bg-gray-100 dark:bg-gray-850">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 animate-on-scroll">Book a Service</h2>
+            <div class="max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8">
+                <form id="booking-form">
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Service Type</label>
+                            <select name="service-type" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                                <option value="">Select a service</option>
+                                <option value="oil-change">Oil Change ($49.99)</option>
+                                <option value="brake-service">Brake Service ($149.99)</option>
+                                <option value="tire-service">Tire Service ($89.99)</option>
+                            </select>
+                        </div>
+
+                        <!-- Vehicle Selector -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <select name="vehicle-make" class="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                                <option value="">Make Type</option>
+                                <option value="standard">Standard (Toyota/Honda/Ford)</option>
+                                <option value="luxury">Luxury (BMW/Mercedes/Audi)</option>
+                            </select>
+                            <select name="vehicle-model" class="p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                                <option value="">Select Model</option>
+                                <option value="standard">Standard (Camry/Civic/Focus)</option>
+                                <option value="luxury">Luxury (3 Series/A4/C-Class)</option>
+                                    
+
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Preferred Date</label>
+                            <input type="date" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Your Phone</label>
+                            <input type="tel" class="w-full p-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" placeholder="+1 (234) 567-8900" required>
+                        </div>
+
+                        <!-- Service Cost Calculator -->
+                        <div class="mt-4 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-medium mb-2">Estimated Cost</h4>
+                            <div id="cost-breakdown" class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Base Service:</span>
+                                    <span id="base-cost">$0.00</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Parts (Est.):</span>
+                                    <span id="parts-cost">$0.00</span>
+                                </div>
+                                <div class="flex justify-between font-bold border-t pt-2">
+                                    <span>Total:</span>
+                                    <span id="total-cost">$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-lg transition-colors">
+                            Book Appointment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Form Validation Message -->
+    <div id="form-message" class="fixed bottom-4 right-4 p-4 rounded-lg shadow-xl transform transition-all duration-300 z-50">
+        <div class="bg-green-500 text-white px-6 py-3 rounded-lg flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <p></p>
+        </div>
+    </div>
+
+    <!-- Move Google Maps here, before footer -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Find Us</h2>
+            <div class="w-full h-96 rounded-lg overflow-hidden shadow-lg">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290355!2d-74.00369368459418!3d40.71277937933185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a23e28c1191%3A0x49f75d3281df052a!2s150%20Park%20Row%2C%20New%20York%2C%20NY%2010007!5e0!3m2!1sen!2sus!4v1569852882799!5m2!1sen!2sus"
+                    class="w-full h-full"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Replace Live Chat Widget with Icon -->
+    <button id="chat-icon" class="fixed bottom-24 right-4 bg-red-500 text-white p-4 rounded-full shadow-lg z-50 hover:bg-red-600 transition-colors">
+        <i class="fas fa-comments text-xl"></i>
+    </button>
+
+    <!-- Chat Panel (hidden by default) -->
+    <div id="chat-panel" class="fixed bottom-40 right-4 bg-white dark:bg-gray-800 rounded-lg shadow-xl w-80 transform z-50 hidden">
+        <div class="p-4 border-b dark:border-gray-700">
+            <div class="flex justify-between items-center">
+                <h3 class="font-bold">Mechanic AI Assistant</h3>
+                <button id="close-chat" class="text-gray-500 hover:text-gray-700">×</button>
+            </div>
+        </div>
+        <div class="chat-messages h-96 overflow-y-auto p-4 space-y-4">
+            <div class="chat-message bot">
+                <div class="bg-gray-600 text-white rounded-lg px-4 py-2 inline-block">
+                    Hello! I'm your AI mechanic assistant. How can I help you with your car today?
+                </div>
+            </div>
+        </div>
+        <form id="chat-form" class="p-4 border-t dark:border-gray-700">
+            <div class="flex gap-2">
+                <input type="text" 
+                       id="chat-input" 
+                       class="flex-1 px-4 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-red-500"
+                       placeholder="Type your question..."
+                       required>
+                <button type="submit" 
+                        class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Service Progress Tracker Modal -->
+    <div id="progress-modal" class="hidden fixed inset-0 bg-black/50 z-50">
+        <div class="bg-white dark:bg-gray-800 max-w-md mx-auto mt-20 rounded-lg shadow-xl">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-4">Service Progress</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 rounded-full bg-green-500 text-white flex items-center justify-center">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="font-medium">Vehicle Check-In</p>
+                            <p class="text-sm text-gray-500">9:00 AM</p>
+                        </div>
+                    </div>
+                    <!-- Add more progress steps -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Emergency Contact -->
+    <a href="tel:1234567890" class="fixed left-4 bottom-4 bg-red-600 text-white px-4 py-2 rounded-full shadow-lg animate-pulse">
+        <i class="fas fa-phone-alt mr-2"></i>
+        Emergency: (123) 456-7890
+    </a>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-red-500 text-white p-3 rounded-full shadow-lg opacity-0 transition-opacity duration-300">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Update Footer -->
+    <footer class="py-8 bg-gray-800 text-gray-300">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Contact</h4>
+                    <p>123 Auto Street</p>
+                    <p>City, State 12345</p>
+                    <p>(123) 456-7890</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Hours</h4>
+                    <p>Mon-Fri: 8am - 6pm</p>
+                    <p>Saturday: 9am - 4pm</p>
+                    <p>Sunday: Closed</p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Follow Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-red-500"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-red-500"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-red-500"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-8 border-t border-gray-700">
+                <p>&copy; 2024 Precision Auto. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        document.getElementById('dark-mode-toggle').addEventListener('click', () => {
+            document.body.classList.toggle('dark');
+        });
+
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+    </script>
+</body>
+</html>

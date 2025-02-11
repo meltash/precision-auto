@@ -1,0 +1,34 @@
+/* Chat Panel */
+#chat-panel {
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+#chat-panel.active {
+    transform: translateX(0);
+}
+
+/* Chat Messages Container */
+.chat-messages {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+    height: 300px;
+}
+
+.chat-message {
+    max-width: 80%;
+}
+
+.chat-message.user {
+    margin-left: 20%;
+}
+
+.chat-message.bot {
+    margin-right: 20%;
+}
+
+.typing-indicator {
+    color: #6B7280;
+    font-style: italic;
+    padding: 0.5rem;
+}
