@@ -6,7 +6,7 @@
 
 ## 🎯 Live Demo
 
-**[View Live Demo](https://vercel.com/meltashs-projects/precision-auto/D9vcXm1AMsYWgRKWGgB2hp9oNunY)** ✨
+**[View Live Demo](https://precision-auto.vercel.app/)** ✨
 
 ![Landing Page](landingpage.png)
 
