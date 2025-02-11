@@ -6,7 +6,7 @@
 
 ## 🎯 Live Demo
 
-**[View Live Demo](https://precision-auto.vercel.app/)** ✨
+**[View Live Demo](https://precision-auto-fba9.vercel.app/)** ✨
 
 ![Landing Page](landingpage.png)
 
