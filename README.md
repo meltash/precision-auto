@@ -6,7 +6,7 @@
 
 ## 🎯 Live Demo
 
-**[View Live Demo](https://meltash.github.io/precision-auto)** ✨
+**[View Live Demo](https://vercel.com/meltashs-projects/precision-auto/D9vcXm1AMsYWgRKWGgB2hp9oNunY)** ✨
 
 ![Landing Page](landingpage.png)
 
